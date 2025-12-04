@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5">
+
+    <!-- 标题栏 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="支付链接抓取模块"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp" />
+
+    <!-- 模块状态 -->
+    <TextView
+        android:id="@+id/tv_module_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="❌ 模块未激活"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <!-- 说明文字 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📱 使用说明："
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#666666"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. 在 LSPosed 中启用本模块\n2. 勾选目标应用（支付宝）\n3. 重启设备或重启支付宝\n4. 进行支付操作，链接会被自动拦截"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="16dp" />
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 拦截数据标题 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📋 拦截记录："
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#666666"
+        android:paddingBottom="8dp" />
+
+    <!-- 拦截数据列表 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_payment_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:padding="8dp" />
+
+</LinearLayout>

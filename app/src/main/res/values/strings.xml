@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">支付抓包模块</string>
+    <string name="module_description">拦截支付宝支付链接和二维码数据</string>
+    <string name="xposed_description">支付链接抓取模块 - 拦截支付宝支付链接</string>
+</resources>
