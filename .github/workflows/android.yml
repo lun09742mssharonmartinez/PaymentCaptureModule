@@ -24,9 +24,16 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
     
-    - name: Make gradlew executable
+    - name: Download Gradle
       run: |
-        # Create gradle wrapper with stable version
+        wget https://services.gradle.org/distributions/gradle-7.6.4-bin.zip
+        unzip -q gradle-7.6.4-bin.zip
+        export PATH=$PWD/gradle-7.6.4/bin:$PATH
+        gradle --version
+    
+    - name: Generate Gradle Wrapper
+      run: |
+        export PATH=$PWD/gradle-7.6.4/bin:$PATH
         gradle wrapper --gradle-version 7.6.4
         chmod +x gradlew
     
