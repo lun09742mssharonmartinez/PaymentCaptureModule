@@ -21,43 +21,26 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     
-    - name: Install Android SDK
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget unzip
-        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
-        mkdir -p $HOME/android-sdk/cmdline-tools
-        unzip commandlinetools-linux-9477386_latest.zip -d $HOME/android-sdk/cmdline-tools
-        mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest
-        echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
-        echo "$HOME/android-sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
     
-    - name: Accept SDK Licenses
-      run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-    
-    - name: Install SDK packages
+    - name: Make gradlew executable
       run: |
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+        # Create gradle wrapper if not exists
+        gradle wrapper --gradle-version 8.0.2
+        chmod +x gradlew
     
-    - name: Build with Gradle
-      run: |
-        cd $GITHUB_WORKSPACE
-        gradle wrapper
-        ./gradlew assembleDebug assembleRelease --no-daemon --stacktrace
+    - name: Build APKs
+      run: ./gradlew assembleDebug assembleRelease --stacktrace
     
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
       with:
-        name: PaymentCapture-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: app-debug
+        path: app/build/outputs/apk/debug/*.apk
     
-    - name: Upload Release APK
+    - name: Upload Release APK  
       uses: actions/upload-artifact@v4
       with:
-        name: PaymentCapture-release
-        path: app/build/outputs/apk/release/app-release-unsigned.apk
-    
-    - name: Build Success
-      run: |
-        echo "✅ APK Build Successful!"
-        echo "📥 Download from Artifacts section"
+        name: app-release
+        path: app/build/outputs/apk/release/*.apk
