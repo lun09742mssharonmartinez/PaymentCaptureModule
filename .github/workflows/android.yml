@@ -26,8 +26,8 @@ jobs:
     
     - name: Make gradlew executable
       run: |
-        # Create gradle wrapper if not exists
-        gradle wrapper --gradle-version 8.0.2
+        # Create gradle wrapper with stable version
+        gradle wrapper --gradle-version 7.6.4
         chmod +x gradlew
     
     - name: Build APKs
